@@ -1,0 +1,14 @@
+// @import '~@fortawesome/fontawesome-free/fontawesome.css';
+// Importo file con le variabili
+@import './vars';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $main-font;
+    background-color: $bg-color;
+}
