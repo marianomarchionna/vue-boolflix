@@ -3,16 +3,28 @@
     <span>BOOLFLIX</span>
     <form class="d-flex my-5">
       <input type="text" placeholder="Search FILM" v-model='inputText'>
-      <button type="submit">Search</button>
-      <button>Reset</button>
+      <button type="submit" @click.prevent="$emit('performSearch', inputText)">Search</button>
+      <button @click.prevent="resetSearch">Reset</button>
     </form>
   </header>
 </template>
 
+
 <script>
 export default {
   name: 'Header',
-  props: {
+  components: {
+  },
+  data() {
+    return {
+      inputText: '',
+    }
+  },
+  methods: {
+    resetSearch() {
+      this.inputText = '';
+      this.$emit('performSearch', this.inputText);
+    }
   }
 }
 </script>
