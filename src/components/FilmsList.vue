@@ -8,39 +8,24 @@
 
 
 <script>
-import axios from 'axios';
 import Film from './Film.vue';
 
 export default {
   name: 'FilmsList',
-  props: ['input'],
+  props: ['filmsList'],
   components: {
     Film
   },
   data() {
     return {
-      APIUrl: ('https://api.themoviedb.org/3/search/movie?api_key=8aeadd2568b18f3ed669ace3260041bb&query=ritorno'),
-      filmsList: [],
+      
     }
   },
   methods: {
-    getFilms() {
-      axios
-          .get(this.APIUrl)
-          .then( res => {
-            this.filmsList = res.data.results;
-            // console.log(res.data)
-          })
-          .catch( err => {
-            console.log("Error ", err);
-          })
-    },
+    
   },
   computed: {
         
-  },
-  created() {
-    this.getFilms();
   }
 }
 </script>

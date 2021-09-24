@@ -3,7 +3,7 @@
     <span>BOOLFLIX</span>
     <form class="d-flex my-5">
       <input type="text" placeholder="Search FILM" v-model='inputText'>
-      <button type="submit" @click.prevent="$emit('performSearch', inputText)">Search</button>
+      <button type="submit" @click.prevent="$emit('search', inputText)">Search</button>
       <button @click.prevent="resetSearch">Reset</button>
     </form>
   </header>

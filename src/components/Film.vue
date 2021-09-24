@@ -6,7 +6,7 @@
                 <span><strong>Titolo:</strong> {{ singleFilm.title }}</span>
                 <span><strong>Titolo originale:</strong> {{ singleFilm.original_title }}</span>
                 <span><strong>Voto:</strong> {{ singleFilm.vote_average }}</span>
-                <span><strong>Lingua originale:</strong> {{ singleFilm.original_language }}</span>
+                <span class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}</span>
             </div>
         </div>
     </div>
@@ -50,6 +50,12 @@ export default {
             transform: rotateY(180deg);
             span {
                 display: block;
+            }
+            .overview {
+                width: 100%;
+                height: 47%;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
