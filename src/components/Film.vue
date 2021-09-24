@@ -1,21 +1,27 @@
 <template>
     <div class="single-card">
         <div class="film">
-            <img :src="`https://image.tmdb.org/t/p/w342${singleFilm.poster_path}`" :alt="singleFilm.title">
+            <img v-if="singleFilm.poster_path!=null" :src="`https://image.tmdb.org/t/p/w342${singleFilm.poster_path}`" :alt="singleFilm.title">
+            <img v-else src="../assets/img/error.jpg" alt="ERRORE">
             <div class="description">
                 <span><strong>Titolo:</strong> {{ singleFilm.title }}</span>
                 <span><strong>Titolo originale:</strong> {{ singleFilm.original_title }}</span>
                 <span><strong>Voto:</strong> {{ singleFilm.vote_average }}</span>
-                <span class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}</span>
+                <span class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}...</span>
+                <span class="flag"><strong>Lingua originale:</strong><country-flag :country="`${ singleFilm.original_language }`"/></span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import CountryFlag from 'vue-country-flag'
 export default {
   name: 'Film',
-  props: ['singleFilm']
+  props: ['singleFilm'],
+  components: {
+        CountryFlag
+    }
 }
 </script>
 
@@ -43,6 +49,7 @@ export default {
             }
         img {
             display: block;
+            object-fit: cover;
         }
         .description {
             padding: 20% 5px 5% 5px;
@@ -53,9 +60,13 @@ export default {
             }
             .overview {
                 width: 100%;
-                height: 47%;
+                height: 40%;
                 overflow: hidden;
                 text-overflow: ellipsis;
+            }
+            .flag {
+                display: flex;
+                align-items: center;
             }
         }
     }

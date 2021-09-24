@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import "@fortawesome/fontawesome-free";
+import CountryFlag from 'vue-country-flag'
+
+Vue.component('country-flag', CountryFlag)
 
 Vue.config.productionTip = false
 
