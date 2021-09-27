@@ -1,9 +1,9 @@
 <template>
-  <div class="film">
-    <h2 v-if="filmsList.length>0">FILM</h2>
-    <div class="container">
-      <div class="single-film" v-for="(film, index) in filmsList" :key="index">
-        <Film :key="index"  :singleFilm="film" />
+  <div class="serie-tv">
+    <h2 v-if="seriesList.length>0">SERIE TV</h2>
+    <div class="container-serie">
+      <div class="single-serie" v-for="(serie, index) in seriesList" :key="index">
+        <Serie :key="index"  :singleSerie="serie" />
       </div>
     </div>
   </div>
@@ -11,13 +11,13 @@
 
 
 <script>
-import Film from './Film.vue';
+import Serie from './Serie.vue';
 
 export default {
-  name: 'FilmsList',
-  props: ['filmsList'],
+  name: 'SeriesList',
+  props: ['seriesList'],
   components: {
-    Film
+    Serie
   },
   data() {
     return {
@@ -36,20 +36,20 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../styles/general';
-.film {
-  margin-top: 50px;
+.serie-tv {
+  margin-top: 100px;
   h2 {
     text-align: center;
     color: $boolflix-color;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   }
-  .container {
+  .container-serie {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
     margin: 0 auto;
     justify-content: center;
-    .single-film {
+    .single-serie {
       margin: 20px;
     }
   }
