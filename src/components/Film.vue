@@ -6,9 +6,9 @@
             <div class="description">
                 <span><strong>Titolo:</strong> {{ singleFilm.title }}</span>
                 <span><strong>Titolo originale:</strong> {{ singleFilm.original_title }}</span>
-                <span><strong>Voto:</strong> {{ singleFilm.vote_average }}</span>
+                <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleFilm.vote_average)" :key="index"></i></span>
                 <span class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}...</span>
-                <span class="flag"><strong>Lingua originale:</strong><country-flag :country="`${ singleFilm.original_language }`"/></span>
+                <span class="flag"><strong>Lingua originale:</strong><country-flag :country="enFlag(singleFilm.original_language)"/></span>
             </div>
         </div>
     </div>
@@ -21,6 +21,17 @@ export default {
   props: ['singleFilm'],
   components: {
         CountryFlag
+    },
+    methods:{
+        enFlag(language){
+            if(language === "en") return "gb"
+            return language
+        },
+        getVote(vote){
+            vote = vote/2;
+            vote = Math.ceil(vote);
+            return vote;
+        }
     }
 }
 </script>
@@ -55,6 +66,9 @@ export default {
             padding: 20% 5px 5% 5px;
             border: 3px solid $gray;
             transform: rotateY(180deg);
+            i {
+                color: $yellow;
+            }
             span {
                 display: block;
             }

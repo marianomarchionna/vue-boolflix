@@ -4,9 +4,9 @@
             <img v-if="singleSerie.poster_path!=null" :src="`https://image.tmdb.org/t/p/w342${singleSerie.poster_path}`" :alt="singleSerie.title">
             <img v-else src="../assets/img/error.jpg" alt="ERRORE">
             <div class="description-serie">
-                <span><strong>Titolo:</strong> {{ singleSerie.title }}</span>
-                <span><strong>Titolo originale:</strong> {{ singleSerie.original_title }}</span>
-                <span><strong>Voto:</strong> {{ singleSerie.vote_average }}</span>
+                <span><strong>Titolo:</strong> {{ singleSerie.name }}</span>
+                <span><strong>Titolo originale:</strong> {{ singleSerie.original_name }}</span>
+                <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleSerie.vote_average)" :key="index"></i></span>
                 <span class="overview-serie"><strong>Overview:</strong> {{ singleSerie.overview }}...</span>
                 <span class="flag-serie"><strong>Lingua originale:</strong><country-flag :country="`${ singleSerie.original_language }`"/></span>
             </div>
@@ -21,6 +21,17 @@ export default {
   props: ['singleSerie'],
   components: {
         CountryFlag
+    },
+     methods:{
+        enFlag(language){
+            if(language === "en") return "gb"
+            return language
+        },
+        getVote(vote){
+            vote = vote/2;
+            vote = Math.ceil(vote);
+            return vote;
+        }
     }
 }
 </script>
@@ -55,6 +66,9 @@ export default {
             padding: 20% 5px 5% 5px;
             border: 3px solid $gray;
             transform: rotateY(180deg);
+            i {
+                color: $yellow;
+            }
             span {
                 display: block;
             }

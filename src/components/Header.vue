@@ -1,10 +1,10 @@
 <template>
   <header>
     <span>BOOLFLIX</span>
-    <form class="d-flex my-5">
-      <input type="text" placeholder="Search FILM" v-model='inputText'>
-      <button type="submit" @click.prevent="$emit('search', inputText)">Search</button>
-      <button @click.prevent="resetSearch">Reset</button>
+    <form>
+      <input type="text" placeholder="Search FILM or TV SERIES" v-model='inputText' @keyUp.enter="$emit('search', inputText)">
+      <button type="submit" @click.prevent="$emit('search', inputText)"><strong>Search</strong></button>
+      <button @click.prevent="resetSearch"><strong>Reset</strong></button>
     </form>
   </header>
 </template>
@@ -47,6 +47,25 @@ header {
   }
   form {
     margin-right: 20px;
+    input {
+      padding: 5px;
+      padding-right: 75px;
+      margin-right: 5px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      cursor: pointer;
+      padding: 5px 20px;
+      margin: 0 5px;
+      color: $white;
+      background-color: $boolflix-color;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
   }
 }
 </style>
