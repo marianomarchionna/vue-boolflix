@@ -1,6 +1,6 @@
 <template>
   <div class="serie-tv">
-    <h2 v-if="seriesList.length>0 && seriesList!='prova'">SERIE TV</h2>
+    <h2 v-if="seriesList.length>0">SERIE TV</h2>
     <div class="container-serie">
       <div class="single-serie" v-for="(serie, index) in seriesList" :key="index">
         <Serie :key="index"  :singleSerie="serie" />

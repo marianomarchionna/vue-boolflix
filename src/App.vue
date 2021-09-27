@@ -26,12 +26,19 @@ export default {
     return {
       APIUrl: 'https://api.themoviedb.org/3/search/',
       APIKey: '8aeadd2568b18f3ed669ace3260041bb',
-      input: "",
-      filmsList: ['prova'],
-      seriesList: ['prova']
+      input: "casa",
+      filmsList: [],
+      seriesList: []
     }
   },
   methods: {
+    searchFilm(inputText){
+      this.input = inputText;
+      if(this.input!=""){
+        this.getMovie();
+        this.getSeries();
+      }
+    },
     getMovie(){
       axios
       .get(this.APIUrl + 'movie?api_key=' + this.APIKey + '&query=' + this.input)
@@ -53,13 +60,6 @@ export default {
       .catch( err => {
         console.log("Error ", err);
       })
-    },
-    searchFilm(inputText){
-      this.input = inputText;
-      if(this.input!=""){
-        this.getMovie();
-        this.getSeries();
-      }
     }
   },
   created(){
@@ -71,6 +71,13 @@ export default {
 
 <style lang="scss">
 @import './styles/general';
+Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
 .no-result {
   text-align: center;
   font-size: 20px;

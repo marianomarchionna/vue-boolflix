@@ -1,6 +1,6 @@
 <template>
   <div class="film">
-    <h2 v-if="filmsList.length>0 && filmsList!='prova'">FILM</h2>
+    <h2 v-if="filmsList.length>0">FILM</h2>
     <div class="container">
       <div class="single-film" v-for="(film, index) in filmsList" :key="index">
         <Film :key="index"  :singleFilm="film" />
@@ -37,7 +37,7 @@ export default {
 <style scoped lang="scss">
 @import '../styles/general';
 .film {
-  margin-top: 50px;
+  margin-top: 150px;
   h2 {
     text-align: center;
     color: $boolflix-color;
