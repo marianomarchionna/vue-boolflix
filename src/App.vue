@@ -5,6 +5,7 @@
     :filmsList="filmsList"/>
     <SeriesList 
     :seriesList="seriesList"/>
+    <div class="no-result" v-if="filmsList.length == 0 && seriesList.length == 0"><strong>NESSUN FILM O SERIE TV TROVATI CORRISPONDENTI ALLA SUA RICERCA</strong></div>
   </div>
 </template>
 
@@ -68,4 +69,8 @@ export default {
 
 <style lang="scss">
 @import './styles/general';
+.no-result {
+  text-align: center;
+  font-size: 20px;
+}
 </style>

@@ -5,9 +5,9 @@
             <img v-else src="../assets/img/error.jpg" alt="ERRORE">
             <div class="description-serie">
                 <span><strong>Titolo:</strong> {{ singleSerie.name }}</span>
-                <span><strong>Titolo originale:</strong> {{ singleSerie.original_name }}</span>
+                <span v-if="singleSerie.name!=singleSerie.original_name"><strong>Titolo originale:</strong> {{ singleSerie.original_name }}</span>
                 <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleSerie.vote_average)" :key="index"></i></span>
-                <span class="overview-serie"><strong>Overview:</strong> {{ singleSerie.overview }}...</span>
+                <p class="overview-serie"><strong>Overview:</strong> {{ singleSerie.overview }}...</p>
                 <span class="flag-serie"><strong>Lingua originale:</strong><country-flag :country="`${ singleSerie.original_language }`"/></span>
             </div>
         </div>
@@ -71,6 +71,9 @@ export default {
             }
             span {
                 display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-height: 20%;
             }
             .overview-serie {
                 width: 100%;

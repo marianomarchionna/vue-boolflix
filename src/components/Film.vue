@@ -5,9 +5,9 @@
             <img v-else src="../assets/img/error.jpg" alt="ERRORE">
             <div class="description">
                 <span><strong>Titolo:</strong> {{ singleFilm.title }}</span>
-                <span><strong>Titolo originale:</strong> {{ singleFilm.original_title }}</span>
+                <span v-if="singleFilm.title!=singleFilm.original_title"><strong>Titolo originale:</strong> {{ singleFilm.original_title }}</span>
                 <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleFilm.vote_average)" :key="index"></i></span>
-                <span class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}...</span>
+                <p class="overview"><strong>Overview:</strong> {{ singleFilm.overview }}...</p>
                 <span class="flag"><strong>Lingua originale:</strong><country-flag :country="enFlag(singleFilm.original_language)"/></span>
             </div>
         </div>
@@ -71,6 +71,9 @@ export default {
             }
             span {
                 display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-height: 20%;
             }
             .overview {
                 width: 100%;
