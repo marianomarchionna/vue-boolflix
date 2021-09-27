@@ -8,7 +8,7 @@
                 <span v-if="singleSerie.name!=singleSerie.original_name"><strong>Titolo originale:</strong> {{ singleSerie.original_name }}</span>
                 <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleSerie.vote_average)" :key="index"></i></span>
                 <p class="overview-serie"><strong>Overview:</strong> {{ singleSerie.overview }}...</p>
-                <span class="flag-serie"><strong>Lingua originale:</strong><country-flag :country="`${ singleSerie.original_language }`"/></span>
+                <span class="flag-serie"><strong>Lingua originale:</strong><country-flag :country="getFlag(singleSerie.original_language)"/></span>
             </div>
         </div>
     </div>
@@ -23,9 +23,13 @@ export default {
         CountryFlag
     },
      methods:{
-        enFlag(language){
-            if(language === "en") return "gb"
-            return language
+        getFlag(language){
+            if(language === "en") 
+                return "gb";
+            else if(language === "ja")
+                return "jpn";
+            else 
+                return language;
         },
         getVote(vote){
             vote = vote/2;
@@ -63,7 +67,7 @@ export default {
             object-fit: cover;
         }
         .description-serie {
-            padding: 20% 5px 5% 5px;
+            padding: 5px;
             border: 3px solid $gray;
             transform: rotateY(180deg);
             i {

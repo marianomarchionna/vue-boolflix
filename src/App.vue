@@ -27,8 +27,8 @@ export default {
       APIUrl: 'https://api.themoviedb.org/3/search/',
       APIKey: '8aeadd2568b18f3ed669ace3260041bb',
       input: "",
-      filmsList: [],
-      seriesList: []
+      filmsList: ['prova'],
+      seriesList: ['prova']
     }
   },
   methods: {
@@ -36,6 +36,7 @@ export default {
       axios
       .get(this.APIUrl + 'movie?api_key=' + this.APIKey + '&query=' + this.input)
       .then(response => {
+        this.filmsList='';
         this.filmsList=response.data.results;
       })
       .catch( err => {
@@ -46,6 +47,7 @@ export default {
       axios
       .get(this.APIUrl + 'tv?api_key=' + this.APIKey + '&query=' + this.input)
       .then(response => {
+        this.seriesList='';
         this.seriesList=response.data.results;
       })
       .catch( err => {
