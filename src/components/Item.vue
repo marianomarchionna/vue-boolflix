@@ -12,6 +12,7 @@
                     <p v-if="item.overview!=''" class="overview"><strong>Overview:</strong> {{ item.overview }} </p>
                     <span v-else><strong>Overview al momento non disponibile</strong></span>
                     <span class="flag"><strong>Lingua originale:</strong><country-flag :country="getFlag(item.original_language)"/></span>
+                    <span><strong>Cast: </strong><i class="fas fa-plus-circle" @click.prevent="$emit('getCast', item.id)"></i></span>
                 </div>
             </div>
         </div>
@@ -20,13 +21,18 @@
 
 <script>
 import CountryFlag from 'vue-country-flag'
+// import axios from 'axios'
 export default {
   name: 'Item',
   props: ['item'],
   components: {
-        CountryFlag
-    },
-    methods:{
+    CountryFlag
+  },
+  data() {
+    return {
+    }
+  },
+  methods:{
         getFlag(language){
             if(language === "en") 
                 return "gb";
@@ -40,7 +46,7 @@ export default {
             vote = Math.ceil(vote);
             return vote;
         }
-    }
+  }
 }
 </script>
 

@@ -3,7 +3,8 @@
     <Header @search="searchFilm"/>
     <Main 
     :filmsList="filmsList"
-    :seriesList="seriesList"/>
+    :seriesList="seriesList"
+    @getCast="getCast"/>
     <div class="no-result" v-if="filmsList.length == 0 && seriesList.length == 0"><strong>NESSUN FILM O SERIE TV TROVATI CORRISPONDENTI ALLA SUA RICERCA</strong></div>
   </div>
 </template>
@@ -23,18 +24,30 @@ export default {
     return {
       APIUrl: 'https://api.themoviedb.org/3/search/',
       APIKey: '8aeadd2568b18f3ed669ace3260041bb',
+      APIUrlCast: 'https://api.themoviedb.org/3/',
       input: "casa",
       filmsList: [],
-      seriesList: []
+      seriesList: [],
+      cast: [],
+      id: ""
     }
   },
   methods: {
     searchFilm(inputText){
       this.input = inputText;
+      window.scrollTo(0, 0);
       if(this.input!=""){
         this.getMovie();
         this.getSeries();
       }
+    },
+    getCast(id, type){
+      axios
+      .get(this.APIUrlCast + type + '/' + id + '/credits?api_key=' + this.APIKey)
+      .then(response => {
+        this.cast=response.data;
+        console.log(response.data)
+      })
     },
     getMovie(){
       axios
@@ -45,6 +58,7 @@ export default {
       .catch( err => {
         console.log("Error ", err);
       })
+      this.getCast('movie')
     },
     getSeries(){
       axios
@@ -55,6 +69,7 @@ export default {
       .catch( err => {
         console.log("Error ", err);
       })
+      this.getCast('tv')
     }
   },
   created(){
