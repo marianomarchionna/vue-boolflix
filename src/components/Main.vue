@@ -46,21 +46,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../styles/general';
-.item {
-  margin-top: 150px;
-  h2 {
-    text-align: center;
-    color: $boolflix-color;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  }
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: 0 auto;
-    justify-content: center;
-    .single {
-      margin: 20px;
+.container {
+  margin-top: 120px;
+  .item {
+    margin-top: 30px;
+    h2 {
+      text-align: center;
+      color: $boolflix-color;
+      text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      width: 80%;
+      margin: 0 auto;
+      justify-content: center;
+      .single {
+        margin: 20px;
+      }
     }
   }
 }

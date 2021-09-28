@@ -94,7 +94,7 @@ export default {
         }
     }
 }
-.single-card:hover .film {
+.card:hover .card-item {
   transform: rotateY(180deg);
   background-color: $header-color;
   cursor: pointer;
