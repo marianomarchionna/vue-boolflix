@@ -1,14 +1,16 @@
 <template>
-    <div class="single">
-        <div class="serie">
-            <img v-if="singleSerie.poster_path!=null" :src="`https://image.tmdb.org/t/p/w342${singleSerie.poster_path}`" :alt="singleSerie.title">
-            <img v-else src="../assets/img/error.jpg" alt="ERRORE">
-            <div class="description-serie">
-                <span><strong>Titolo:</strong> {{ singleSerie.name }}</span>
-                <span v-if="singleSerie.name!=singleSerie.original_name"><strong>Titolo originale:</strong> {{ singleSerie.original_name }}</span>
-                <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(singleSerie.vote_average)" :key="index"></i></span>
-                <p class="overview-serie"><strong>Overview:</strong> {{ singleSerie.overview }}...</p>
-                <span class="flag-serie"><strong>Lingua originale:</strong><country-flag :country="getFlag(singleSerie.original_language)"/></span>
+    <div class="item-container">
+        <div class="card">
+            <div class="card-item">
+                <img v-if="item.poster_path!=null" :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`" :alt="item.title">
+                <img v-else src="../assets/img/error.jpg" alt="ERRORE">
+                <div class="description">
+                    <span><strong>Titolo:</strong> {{ item.title }}</span>
+                    <span v-if="item.title!=item.original_title"><strong>Titolo originale:</strong> {{ item.original_title }}</span>
+                    <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(item.vote_average)" :key="index"></i></span>
+                    <p class="overview"><strong>Overview:</strong> {{ item.overview }}...</p>
+                    <span class="flag"><strong>Lingua originale:</strong><country-flag :country="getFlag(item.original_language)"/></span>
+                </div>
             </div>
         </div>
     </div>
@@ -17,12 +19,12 @@
 <script>
 import CountryFlag from 'vue-country-flag'
 export default {
-  name: 'Serie',
-  props: ['singleSerie'],
+  name: 'Item',
+  props: ['item'],
   components: {
         CountryFlag
     },
-     methods:{
+    methods:{
         getFlag(language){
             if(language === "en") 
                 return "gb";
@@ -43,19 +45,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../styles/general';
-.single{
+.card{
     background-color: transparent;
     width: 200px;
     height: 300px;
     perspective: 1000px;
-    .serie {
+    .card-item {
         position: relative;
         width: 100%;
         height: 100%;
         transition: transform 0.6s;
         transform-style: preserve-3d;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-        img, .description-serie {
+        img, .description {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -66,7 +68,7 @@ export default {
             display: block;
             object-fit: cover;
         }
-        .description-serie {
+        .description {
             padding: 5px;
             border: 3px solid $gray;
             transform: rotateY(180deg);
@@ -79,20 +81,20 @@ export default {
                 text-overflow: ellipsis;
                 max-height: 20%;
             }
-            .overview-serie {
+            .overview {
                 width: 100%;
                 height: 40%;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-            .flag-serie {
+            .flag {
                 display: flex;
                 align-items: center;
             }
         }
     }
 }
-.single-serie:hover .serie {
+.single-card:hover .film {
   transform: rotateY(180deg);
   background-color: $header-color;
   cursor: pointer;

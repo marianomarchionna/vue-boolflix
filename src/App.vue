@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <Header @search="searchFilm"/>
-    <FilmsList 
-    :filmsList="filmsList"/>
-    <SeriesList 
+    <Main 
+    :filmsList="filmsList"
     :seriesList="seriesList"/>
     <div class="no-result" v-if="filmsList.length == 0 && seriesList.length == 0"><strong>NESSUN FILM O SERIE TV TROVATI CORRISPONDENTI ALLA SUA RICERCA</strong></div>
   </div>
@@ -11,16 +10,14 @@
 
 <script>
 import Header from './components/Header.vue'
-import FilmsList from './components/FilmsList.vue'
-import SeriesList from './components/SeriesList.vue'
+import Main from './components/Main.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
     Header,
-    FilmsList,
-    SeriesList
+    Main
   },
   data() {
     return {
@@ -43,7 +40,6 @@ export default {
       axios
       .get(this.APIUrl + 'movie?api_key=' + this.APIKey + '&query=' + this.input)
       .then(response => {
-        this.filmsList='';
         this.filmsList=response.data.results;
       })
       .catch( err => {
@@ -54,7 +50,6 @@ export default {
       axios
       .get(this.APIUrl + 'tv?api_key=' + this.APIKey + '&query=' + this.input)
       .then(response => {
-        this.seriesList='';
         this.seriesList=response.data.results;
       })
       .catch( err => {

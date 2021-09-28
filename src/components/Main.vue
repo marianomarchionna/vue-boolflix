@@ -1,9 +1,19 @@
 <template>
-  <div class="film">
-    <h2 v-if="filmsList.length>0">FILM</h2>
-    <div class="container">
-      <div class="single-film" v-for="(film, index) in filmsList" :key="index">
-        <Film :key="index"  :singleFilm="film" />
+  <div class="container">
+    <div class="item">
+      <h2 v-if="filmsList.length>0">FILM</h2>
+      <div class="container">
+        <div class="single" v-for="(item, index) in filmsList" :key="index">
+          <Item :item="item" />
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <h2 v-if="seriesList.length>0">SERIE TV</h2>
+      <div class="container">
+        <div class="single" v-for="(item, index) in seriesList" :key="index">
+          <Item :item="item" />
+        </div>
       </div>
     </div>
   </div>
@@ -11,13 +21,13 @@
 
 
 <script>
-import Film from './Film.vue';
+import Item from './Item.vue';
 
 export default {
-  name: 'FilmsList',
-  props: ['filmsList'],
+  name: 'Main',
+  props: ['filmsList', 'seriesList'],
   components: {
-    Film
+    Item
   },
   data() {
     return {
@@ -36,7 +46,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import '../styles/general';
-.film {
+.item {
   margin-top: 150px;
   h2 {
     text-align: center;
@@ -49,7 +59,7 @@ export default {
     width: 80%;
     margin: 0 auto;
     justify-content: center;
-    .single-film {
+    .single {
       margin: 20px;
     }
   }
