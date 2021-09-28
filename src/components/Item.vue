@@ -5,10 +5,12 @@
                 <img v-if="item.poster_path!=null" :src="`https://image.tmdb.org/t/p/w342${item.poster_path}`" :alt="item.title">
                 <img v-else src="../assets/img/error.jpg" alt="ERRORE">
                 <div class="description">
-                    <span><strong>Titolo:</strong> {{ item.title }}</span>
-                    <span v-if="item.title!=item.original_title"><strong>Titolo originale:</strong> {{ item.original_title }}</span>
-                    <span><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(item.vote_average)" :key="index"></i></span>
-                    <p class="overview"><strong>Overview:</strong> {{ item.overview }}...</p>
+                    <span><strong>Titolo:</strong> {{ item.title || item.name }}</span>
+                    <span v-if="item.title!=item.original_title || item.name!=item.original_name"><strong>Titolo originale:</strong> {{ item.original_title || item.original_name }}</span>
+                    <span v-if="item.vote_average!=0"><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(item.vote_average)" :key="index"></i></span>
+                    <span v-else><strong>Valutazione al momento non disponibile</strong></span>
+                    <p v-if="item.overview!=''" class="overview"><strong>Overview:</strong> {{ item.overview }} </p>
+                    <span v-else><strong>Overview al momento non disponibile</strong></span>
                     <span class="flag"><strong>Lingua originale:</strong><country-flag :country="getFlag(item.original_language)"/></span>
                 </div>
             </div>
