@@ -8,11 +8,12 @@
                     <span><strong>Titolo:</strong> {{ item.title || item.name }}</span>
                     <span v-if="item.title!=item.original_title || item.name!=item.original_name"><strong>Titolo originale:</strong> {{ item.original_title || item.original_name }}</span>
                     <span v-if="item.vote_average!=0"><strong>Voto: </strong><i class="fas fa-star" v-for="(star, index) in getVote(item.vote_average)" :key="index"></i></span>
-                    <span v-else><strong>Valutazione al momento non disponibile</strong></span>
+                    <span v-else><strong>Voto non disponibile</strong></span>
                     <p v-if="item.overview!=''" class="overview"><strong>Overview:</strong> {{ item.overview }} </p>
-                    <span v-else><strong>Overview al momento non disponibile</strong></span>
+                    <span v-else><strong>Overview non disponibile</strong></span>
                     <span class="flag"><strong>Lingua originale:</strong><country-flag :country="getFlag(item.original_language)"/></span>
-                    <span><strong>Cast: </strong><i class="fas fa-plus-circle" @click.prevent="$emit('getCast', item.id)"></i></span>
+                    <span v-if="item.name === undefined"><strong>Cast: </strong><Cast :type='movie' :id="item.id" /></span>
+                    <span v-else-if="item.title === undefined"><strong>Cast: </strong><Cast :type='tv' :id="item.id" /></span>
                 </div>
             </div>
         </div>
@@ -21,15 +22,19 @@
 
 <script>
 import CountryFlag from 'vue-country-flag'
-// import axios from 'axios'
+import Cast from "./Cast.vue";
+
 export default {
   name: 'Item',
   props: ['item'],
   components: {
-    CountryFlag
+    CountryFlag,
+    Cast
   },
   data() {
     return {
+        movie: 'movie',
+        tv: 'tv'
     }
   },
   methods:{
@@ -54,6 +59,7 @@ export default {
 <style scoped lang="scss">
 @import '../styles/general';
 .card{
+    font-size: 15px;
     background-color: transparent;
     width: 200px;
     height: 300px;
@@ -87,11 +93,10 @@ export default {
                 display: block;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                max-height: 20%;
             }
             .overview {
                 width: 100%;
-                height: 40%;
+                height: 30%;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
